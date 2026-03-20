@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('/fonts/centurygothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('/fonts/centurygothic_bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.ttf');
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-VariableItalic.ttf');
+  font-style: italic;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'ComicShannsMono';
+  src: url('/fonts/ComicShannsMonoNerdFontPropo-Regular.otf');
+  font-style: italic;
+  font-display: fallback;
+}
+
+@layer base {
+  :root {
+    --background: 48 33% 97%;
+    --foreground: 200 32% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 32% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 32% 12%;
+    --primary: 179 53% 28%;
+    --primary-foreground: 48 33% 97%;
+    --secondary: 42 40% 93%;
+    --secondary-foreground: 200 32% 12%;
+    --muted: 42 26% 92%;
+    --muted-foreground: 200 18% 34%;
+    --accent: 25 89% 92%;
+    --accent-foreground: 200 32% 12%;
+    --destructive: 0 72.22% 50.59%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 14% 82%;
+    --input: 180 14% 88%;
+    --ring: 179 53% 28%;
+    --radius: 1rem;
+  }
+  .dark {
+    --background: 205 37% 7%;
+    --foreground: 40 30% 96%;
+    --card: 205 30% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 205 30% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 172 58% 70%;
+    --primary-foreground: 205 37% 7%;
+    --secondary: 205 20% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 205 20% 14%;
+    --muted-foreground: 35 12% 74%;
+    --accent: 205 20% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 205 16% 22%;
+    --input: 205 16% 18%;
+    --ring: 172 58% 70%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Satoshi', 'Century Gothic', sans-serif;
+    background-image:
+      radial-gradient(circle at top left, rgba(54, 130, 120, 0.12), transparent 32%),
+      radial-gradient(circle at top right, rgba(255, 183, 120, 0.16), transparent 28%),
+      linear-gradient(180deg, rgba(255, 250, 242, 0.9), rgba(246, 245, 239, 0.96));
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  html.dark body {
+    background-image:
+      radial-gradient(circle at top left, rgba(54, 130, 120, 0.18), transparent 30%),
+      radial-gradient(circle at top right, rgba(255, 183, 120, 0.08), transparent 24%),
+      linear-gradient(180deg, rgba(8, 18, 24, 0.98), rgba(11, 26, 32, 1));
+  }
+  a {
+    @apply transition-colors hover:text-primary;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+  }
+}

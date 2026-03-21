@@ -1,6 +1,14 @@
 ---
 import { cn } from '@/utils'
+
 import PublicationCard from './PublicationCard.astro'
+
+const toAnchorId = (value: string) =>
+  `publication-${value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')}`
 
 interface Props {
   class?: string
@@ -62,7 +70,7 @@ const sortedYears = Object.keys(groupedPublications).sort((a, b) => {
         {groupByYear && <p class='mb-4 text-xl font-semibold text-foreground'>{year}</p>}
         <div class='space-y-4'>
           {groupedPublications[year].map((publication) => (
-            <PublicationCard {publication} />
+            <PublicationCard id={toAnchorId(publication.title)} {publication} />
           ))}
         </div>
       </div>

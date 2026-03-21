@@ -45,9 +45,9 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: 'Vision', link: '/#vision' },
-      { title: 'Research', link: '/#research' },
-      { title: 'Platform', link: '/#platform' },
-      { title: 'Join Us', link: '/#join' }
+      { title: 'Team', link: '/#team' },
+      { title: 'About', link: '/#about' },
+      { title: 'Publications', link: '/#publications' }
     ]
   },
 

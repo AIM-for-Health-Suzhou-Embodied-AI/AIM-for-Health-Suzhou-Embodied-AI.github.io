@@ -25,6 +25,8 @@ export { default as SimpleIcon } from './SimpleIcon.astro'
 // Publications
 export { default as PublicationCard } from './PublicationCard.astro'
 export { default as PublicationSection } from './PublicationSection.astro'
+export { default as MemberCard } from './MemberCard.astro'
+export { default as LabStoryCard } from './LabStoryCard.astro'
 export { default as CardListChildren } from './CardListChildren.astro'
 export { default as ResearchProjectSection } from './ResearchProjectSection.astro'
 export { default as DistributionSection } from './DistributionSection.astro'

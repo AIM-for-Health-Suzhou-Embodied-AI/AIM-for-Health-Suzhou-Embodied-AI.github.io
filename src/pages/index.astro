@@ -1,40 +1,106 @@
 ---
-import { Button } from '@/components/user'
+import { Button, LabStoryCard, MemberCard, PublicationSection } from '@/components/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 
-const focusAreas = [
+const members = [
   {
-    index: '01',
-    title: 'Multimodal World Models',
-    description:
-      'Build embodied agents that can interpret video, language, and sensor signals as one coherent decision space.'
+    name: 'Xingjian Wang',
+    role: 'Principal Investigator',
+    photo: '/avatar/avatar.png',
+    bio: 'Leads the lab direction across embodied intelligence, multimodal learning, and deployable AI systems.'
   },
   {
-    index: '02',
-    title: 'Clinical-Grade Intelligence',
-    description:
-      'Translate foundation-model capability into medical and health scenarios where reliability, traceability, and human oversight matter.'
+    name: 'Teacher 2',
+    role: 'Co-Investigator',
+    photo: '/images/social-card.webp',
+    bio: 'Co-leads research on 3D scene understanding and medical AI.'
   },
   {
-    index: '03',
-    title: 'Interactive Learning Systems',
-    description:
-      'Design training loops where simulation, feedback, and real-world interaction continuously refine perception and action.'
+    name: 'Student 1',
+    role: 'PhD Student',
+    photo: '/images/wormhole.png',
+    bio: 'Focuses on 3D reconstruction and digital twins.'
+  },
+  {
+    name: 'Student 2',
+    role: 'PhD Student',
+    photo: '/avatar/avatar.png',
+    bio: 'Researches large multimodal models and agency.'
+  },
+  {
+    name: 'Student 3',
+    role: 'Master Student',
+    photo: '/images/social-card.webp',
+    bio: 'Explores vision-language navigation.'
+  },
+  {
+    name: 'Student 4',
+    role: 'Master Student',
+    photo: '/images/wormhole.png',
+    bio: 'Works on medical image analysis.'
+  },
+  {
+    name: 'Student 5',
+    role: 'Master Student',
+    photo: '/avatar/avatar.png',
+    bio: 'Studies reinforcement learning for robotics.'
+  },
+  {
+    name: 'Student 6',
+    role: 'Intern',
+    photo: '/images/social-card.webp',
+    bio: 'Assists with computer vision and graphics.'
+  },
+  {
+    name: 'Student 7',
+    role: 'Intern',
+    photo: '/images/wormhole.png',
+    bio: 'Research intern for multimodal learning.'
   }
 ]
 
-const platformPillars = [
+const publications = [
   {
-    title: 'Data Engine',
-    copy: 'Curated multimodal datasets, structured evaluation, and failure analysis pipelines for rapid iteration.'
+    title: 'Embodied Reasoning for Health-Centered Multimodal Agents',
+    authors: [
+      { name: 'Xingjian Wang', isMe: true },
+      { name: 'Research Scientist A' },
+      { name: 'PhD Student B' }
+    ],
+    venue: 'CVPR',
+    year: '2026',
+    type: 'conference' as const,
+    abstract:
+      'A multimodal embodied framework that connects video, language, and task planning for reliable reasoning in health-adjacent interactive settings.',
+    links: [
+      { type: 'pdf', href: '#' },
+      { type: 'code', href: '#' },
+      { type: 'website', href: '#' }
+    ],
+    status: 'accepted' as const,
+    previewImage: '/images/social-card.webp',
+    previewAlt: 'Embodied reasoning paper preview'
   },
   {
-    title: 'Model Stack',
-    copy: 'From perception backbones to reasoning modules and agent orchestration, built for end-to-end embodied tasks.'
-  },
-  {
-    title: 'Deployment Lens',
-    copy: 'Research framed around environments where trust, usability, and measurable impact are non-negotiable.'
+    title: 'Video Grounding Pipelines for Long-Horizon Embodied Decision Making',
+    authors: [
+      { name: 'PhD Student B', isEqual: true },
+      { name: 'Research Scientist A', isEqual: true },
+      { name: 'Xingjian Wang', role: 'corresponding' as const, isMe: true }
+    ],
+    venue: 'NeurIPS',
+    year: '2025',
+    type: 'conference' as const,
+    abstract:
+      'Introduces a video-grounded reasoning stack that improves long-horizon task decomposition and temporal evidence tracking for embodied agents.',
+    links: [
+      { type: 'arxiv', href: '#' },
+      { type: 'code', href: '#' },
+      { type: 'video', href: '#' }
+    ],
+    status: 'preprint' as const,
+    previewImage: '/images/wormhole.png',
+    previewAlt: 'Video grounding paper preview'
   }
 ]
 ---
@@ -47,179 +113,189 @@ const platformPillars = [
   }}
   highlightColor='#2E8B7B55'
 >
-  <main class='landing-shell relative left-1/2 w-screen -translate-x-1/2 overflow-x-hidden'>
+  <main class='landing-shell relative left-1/2 w-screen -translate-x-1/2 overflow-x-hidden pt-12 text-slate-900 dark:text-slate-100 selection:bg-emerald-500/30'>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[760px] bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] opacity-60 [mask-image:radial-gradient(ellipse_62%_52%_at_50%_0%,#000_64%,transparent_100%)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] dark:opacity-40"></div>
+    <div class="pointer-events-none absolute left-1/2 top-24 -z-10 h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-emerald-400/5 blur-[120px] dark:bg-teal-700/10"></div>
+    
     <section
       id='vision'
-      class='landing-panel relative flex min-h-screen snap-start items-start overflow-hidden px-6 pb-8 pt-10 sm:px-10 sm:pb-10 sm:pt-12 lg:px-16 lg:pt-10'
+      class='landing-panel relative flex min-h-[90vh] snap-start items-center px-6 pb-20 pt-16 sm:px-10 sm:pt-24 lg:px-16 lg:pt-0'
     >
-      <div class='landing-orb landing-orb-a'></div>
-      <div class='landing-orb landing-orb-b'></div>
-      <div class='mx-auto mt-0 w-full max-w-7xl lg:mt-0'>
-        <div class='max-w-4xl space-y-5'>
-          <div class='inline-flex items-center gap-3 rounded-full border border-white/50 bg-white/70 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-700 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-slate-200'>
-            <span class='inline-block h-2 w-2 rounded-full bg-emerald-500'></span>
-            Suzhou-based research lab
+      <div class='mx-auto mt-0 w-full max-w-7xl lg:mt-0 relative z-10'>
+        <div class='max-w-4xl space-y-8 reveal-on-scroll is-visible'>
+          
+          <div class='inline-flex items-center gap-2.5 rounded-full border border-slate-200/60 bg-white/40 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-[0_2px_12px_rgba(0,0,0,0.03)] backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-slate-300'>
+            <span class='relative flex h-1.5 w-1.5 mr-0.5'>
+              <span class='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75'></span>
+              <span class='relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500'></span>
+            </span>
+            AIM for Health (Suzhou)
           </div>
-          <div class='max-w-4xl space-y-3'>
-            <p class='text-xs font-medium uppercase tracking-[0.28em] text-primary/80 sm:text-sm'>AIM for Health (Suzhou)</p>
-            <h1 class='max-w-4xl text-4xl font-bold leading-[0.92] text-slate-950 dark:text-white sm:text-5xl lg:text-6xl'>
-              Embodied AI for systems that can perceive, reason, and act in the real world.
+          
+          <div class='max-w-4xl space-y-6'>
+            <h1 class='text-5xl font-extrabold leading-[1.05] tracking-tighter text-slate-900 dark:text-white sm:text-6xl lg:text-[5.5rem]'>
+              Embodied AI for systems that <span class="bg-gradient-to-br from-slate-700 to-slate-400 bg-clip-text text-transparent dark:from-white dark:to-slate-500">perceive, reason, and act.</span>
             </h1>
-            <p class='max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300 sm:text-lg'>
-              Multimodal intelligence around video understanding, foundation models, and deployable human-centered environments, with health as a concrete proving ground.
+            <p class='max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 sm:text-xl'>
+              We build intelligent visual systems that bridge embodied AI and clinical medicine — leveraging 3D scene understanding, multimodal agents, and geometry-aware reconstruction.
             </p>
           </div>
-          <div class='flex flex-wrap gap-3 pt-1'>
-            <Button href='/#research' title='Explore Research' class='rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200' />
-            <Button href='/#join' title='Join the Lab' class='rounded-full border-white/50 bg-white/60 px-6 py-3 text-sm font-semibold text-slate-800 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10' />
+          <div class='flex flex-wrap gap-4 pt-4'>
+            <Button href='/#team' title='Meet the Team' class='rounded-full border border-slate-900 bg-slate-900 px-7 py-3.5 text-[13px] font-semibold tracking-wide !text-white shadow-[0_4px_14px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-800 hover:bg-slate-800 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:!text-white dark:border-white dark:bg-white dark:!text-slate-900 dark:hover:border-slate-100 dark:hover:bg-slate-100 dark:hover:!text-slate-900' />
+            <Button href='/#publications' title='View Research' class='rounded-full border border-slate-200/80 bg-white/50 px-7 py-3.5 text-[13px] font-semibold tracking-wide text-slate-700 shadow-[0_2px_8px_rgba(0,0,0,0.03)] backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white/80 hover:text-slate-900 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20 dark:hover:bg-white/10 dark:hover:text-white' />
           </div>
         </div>
       </div>
     </section>
 
-    <section
-      id='research'
-      class='landing-panel landing-panel-muted flex min-h-screen snap-start items-center px-6 py-20 sm:px-10 lg:px-16'
-    >
-      <div class='mx-auto grid w-full max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center'>
-        <div class='space-y-6'>
-          <p class='text-sm font-medium uppercase tracking-[0.26em] text-primary/80'>Research directions</p>
-          <h2 class='text-4xl font-bold leading-tight text-slate-950 dark:text-white sm:text-5xl'>
-            We treat embodied intelligence as a systems problem, not a single-model benchmark.
-          </h2>
-          <p class='max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300'>
-            The lab integrates perception, memory, evaluation, and action. We focus on model behavior under realistic data shift, rich temporal context, and environments where interaction quality matters as much as raw accuracy.
-          </p>
-        </div>
-        <div class='grid gap-5'>
-          {focusAreas.map((area) => (
-            <article class='rounded-[1.75rem] border border-white/60 bg-white/70 p-7 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:border-white/10 dark:bg-white/5'>
-              <p class='mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-primary/75'>{area.index}</p>
-              <h3 class='mb-3 text-2xl font-semibold text-slate-900 dark:text-white'>{area.title}</h3>
-              <p class='leading-7 text-slate-600 dark:text-slate-300'>{area.description}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16"><div class="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-800/60"></div></div>
 
     <section
-      id='platform'
-      class='landing-panel flex min-h-screen snap-start items-center px-6 py-20 sm:px-10 lg:px-16'
+      id='team'
+      class='landing-panel relative flex min-h-[85vh] items-center px-6 py-24 sm:px-10 lg:px-16'
     >
-      <div class='mx-auto grid w-full max-w-7xl gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center'>
-        <div class='grid gap-4 sm:grid-cols-3'>
-          {platformPillars.map((pillar) => (
-            <article class='rounded-[1.75rem] border border-slate-200/80 bg-white/75 p-6 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:border-white/10 dark:bg-slate-950/55'>
-              <p class='mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary/75'>{pillar.title}</p>
-              <p class='text-sm leading-7 text-slate-600 dark:text-slate-300'>{pillar.copy}</p>
-            </article>
-          ))}
-        </div>
-        <div class='space-y-6'>
-          <p class='text-sm font-medium uppercase tracking-[0.26em] text-primary/80'>Platform</p>
-          <h2 class='text-4xl font-bold leading-tight text-slate-950 dark:text-white sm:text-5xl'>
-            A unified stack for turning multimodal research into robust embodied systems.
+      <div class='mx-auto w-full max-w-7xl space-y-16 relative z-10 reveal-on-scroll' data-reveal-delay='0'>
+        <div class='max-w-3xl space-y-5'>
+          <p class='font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500'>[ Team ]</p>
+          <h2 class='text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl'>
+            People building the lab across embodied intelligence, multimodal systems, and health-facing AI.
           </h2>
-          <p class='max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300'>
-            We want the homepage to signal how the lab works: data and evaluation are first-class citizens, models are built with deployment constraints in view, and every prototype is framed around interpretable system behavior.
-          </p>
-          <div class='rounded-[1.75rem] border border-slate-200/80 bg-slate-950 p-7 text-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.2)] dark:border-white/10'>
-            <p class='text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300'>Current emphasis</p>
-            <p class='mt-4 text-2xl font-semibold'>
-              Video reasoning, embodied planning, and health-adjacent intelligent interfaces.
-            </p>
-            <p class='mt-4 max-w-lg text-sm leading-7 text-slate-300'>
-              The lab direction stays broad enough for frontier model research while remaining concrete enough to support translational, domain-grounded applications.
-            </p>
+        </div>
+        
+        <div class="space-y-10">
+          <!-- Teachers -->
+          <div>
+            <h3 class="mb-4 text-[11px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Principal Investigators</h3>
+            <div class='mx-auto grid max-w-5xl gap-x-12 gap-y-10 md:grid-cols-2 xl:grid-cols-3'>
+              {members.slice(0, 2).map((member, index) => <MemberCard member={member} class='reveal-on-scroll' data-reveal-delay={String(index * 80)} />)}
+            </div>
+          </div>
+          <!-- Students -->
+          <div>
+            <h3 class="mb-4 mt-6 text-[11px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Researchers & Students</h3>
+            <div class='mx-auto grid max-w-5xl gap-x-12 gap-y-10 md:grid-cols-2 xl:grid-cols-3'>
+              {members.slice(2).map((member, index) => <MemberCard member={member} class='reveal-on-scroll' data-reveal-delay={String(80 + index * 70)} />)}
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16"><div class="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-800/60"></div></div>
+
     <section
-      id='join'
-      class='landing-panel landing-panel-dark flex min-h-screen snap-start items-center px-6 py-20 sm:px-10 lg:px-16'
+      id='about'
+      class='landing-panel relative flex min-h-[80vh] items-center px-6 py-24 sm:px-10 lg:px-16'
     >
-      <div class='mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end'>
-        <div class='space-y-6'>
-          <p class='text-sm font-medium uppercase tracking-[0.26em] text-emerald-300'>Join us</p>
-          <h2 class='text-4xl font-bold leading-tight text-white sm:text-5xl'>
-            We are building an ambitious lab identity at the intersection of embodied AI and health.
-          </h2>
-          <p class='max-w-2xl text-lg leading-8 text-slate-300'>
-            We welcome researchers, engineers, and students who care about rigorous multimodal systems, strong taste in evaluation, and applications that benefit from grounded human collaboration.
-          </p>
-        </div>
-        <div class='rounded-[2rem] border border-white/10 bg-white/5 p-7 backdrop-blur-xl'>
-          <p class='text-xs font-semibold uppercase tracking-[0.24em] text-slate-400'>What this homepage is ready for next</p>
-          <ul class='mt-5 space-y-4 text-sm leading-7 text-slate-300'>
-            <li>Faculty and team member profiles</li>
-            <li>Featured publications and benchmark results</li>
-            <li>Recruitment pipeline for interns and collaborators</li>
-            <li>Lab news, demos, and project landing pages</li>
-          </ul>
-          <div class='mt-8'>
-            <Button
-              href='mailto:contact@example.com'
-              title='Contact the Lab'
-              class='rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-200'
-            />
+      <div class='mx-auto w-full max-w-7xl relative z-10 reveal-on-scroll' data-reveal-delay='40'>
+        <div class='grid grid-cols-1 items-stretch gap-5 lg:grid-cols-12 lg:gap-10'>
+          
+          <!-- Image (Left) -->
+          <div class='lg:col-span-5 w-full'>
+            <div class='relative h-full min-h-[350px] w-full overflow-hidden rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-200/50 dark:border-white/5'>
+              <img
+                src='/images/wormhole.png'
+                alt='Spatial Perception Research'
+                class='absolute inset-0 h-full w-full object-cover transition-transform duration-1000 hover:scale-105'
+                loading='lazy'
+              />
+            </div>
           </div>
+
+          <!-- Text block (Right) -->
+          <div class='flex h-full flex-col justify-center rounded-[2rem] bg-white/60 backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.02)] border border-slate-200/50 p-8 dark:bg-white/[0.02] dark:border-white/5 sm:p-10 lg:col-span-7 lg:p-16'>
+            <div class='mb-6 font-mono text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500'>
+              [ About The Lab ]
+            </div>
+            
+            <h2 class='text-3xl font-semibold leading-[1.2] tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-[2.8rem]'>
+              We build intelligent visual systems that bridge <span class='italic text-emerald-600 dark:text-emerald-400'>embodied AI</span> and <span class='italic text-emerald-600 dark:text-emerald-400'>clinical medicine.</span>
+            </h2>
+            
+            <div class='mt-10 max-w-2xl border-l-2 border-slate-200/80 pl-6 dark:border-slate-800'>
+              <p class='text-[17px] leading-relaxed text-slate-500 dark:text-slate-400'>
+                Leveraging 3D scene understanding, multimodal agents, and geometry-aware reconstruction to advance spatial perception and interaction across surgical scenarios and digital twins.
+              </p>
+            </div>
+
+            <div class='mt-12 flex items-center gap-6'>
+              <a href="#publications" class="group flex items-center gap-2 text-[13px] font-semibold uppercase tracking-widest text-slate-900 transition-colors hover:text-emerald-600 dark:text-white dark:hover:text-emerald-400">
+                Explore Papers 
+                <span class='transition-transform group-hover:translate-x-2'>→</span>
+              </a>
+            </div>
+          </div>
+          
         </div>
+      </div>
+    </section>
+
+    <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16"><div class="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-800/60"></div></div>
+
+    <section
+      id='publications'
+      class='landing-panel relative flex min-h-screen items-center px-6 py-24 sm:px-10 lg:px-16'
+    >
+      <div class='mx-auto w-full max-w-7xl space-y-12 relative z-10 reveal-on-scroll' data-reveal-delay='60'>
+        <div class='max-w-3xl space-y-5'>
+          <p class='font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500'>[ Publications ]</p>
+          <h2 class='text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl'>
+            Recent work from the lab.
+          </h2>
+        </div>
+        <PublicationSection publications={publications} class='publication-shell' />
       </div>
     </section>
   </main>
 </PageLayout>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const elements = document.querySelectorAll('.reveal-on-scroll')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-reveal-delay') || '0'
+          entry.target.setAttribute('style', `transition-delay:${delay}ms`)
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+    elements.forEach(el => {
+      if (!el.classList.contains('is-visible')) observer.observe(el)
+    })
+  });
+</script>
+
 <style>
   .landing-shell {
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
   }
 
   .landing-panel {
     position: relative;
+    border: none !important;
   }
 
-  .landing-panel-muted {
-    background:
-      linear-gradient(180deg, rgba(255, 249, 240, 0.7), rgba(240, 247, 244, 0.94)),
-      radial-gradient(circle at 10% 20%, rgba(244, 186, 123, 0.2), transparent 28%);
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
   }
 
-  :global(.dark .landing-panel-muted) {
-    background:
-      linear-gradient(180deg, rgba(14, 28, 34, 0.82), rgba(11, 24, 30, 0.96)),
-      radial-gradient(circle at 10% 20%, rgba(244, 186, 123, 0.08), transparent 28%);
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
-  .landing-panel-dark {
-    background:
-      radial-gradient(circle at top left, rgba(55, 148, 133, 0.25), transparent 28%),
-      linear-gradient(180deg, rgba(8, 21, 28, 0.96), rgba(8, 18, 24, 1));
-  }
-
-  .landing-orb {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(48px);
-    pointer-events: none;
-  }
-
-  .landing-orb-a {
-    top: 10%;
-    right: -6%;
-    height: 24rem;
-    width: 24rem;
-    background: rgba(72, 170, 153, 0.18);
-  }
-
-  .landing-orb-b {
-    bottom: 8%;
-    left: -8%;
-    height: 20rem;
-    width: 20rem;
-    background: rgba(255, 184, 107, 0.2);
+  :global(.publication-shell > div > p) {
+    color: rgb(248 250 252 / 0.92);
   }
 
   @media (max-width: 768px) {

@@ -72,6 +72,18 @@ const statusColors = {
 
 const symbolBaseClass = 'text-primary dark:text-blue-400'
 const symbolMutedClass = 'text-muted-foreground/80 dark:text-slate-400/80'
+
+const leadingEqualAuthors: typeof publication.authors = []
+for (const author of publication.authors) {
+  if (!author.isEqual) break
+  leadingEqualAuthors.push(author)
+}
+
+const displayedAuthors =
+  leadingEqualAuthors.length >= 2
+    ? leadingEqualAuthors.slice(0, 3)
+    : publication.authors.slice(0, 1)
+const hasHiddenAuthors = publication.authors.length > displayedAuthors.length
 ---
 
 <div
@@ -113,7 +125,7 @@ const symbolMutedClass = 'text-muted-foreground/80 dark:text-slate-400/80'
         {
           publication.authors && publication.authors.length > 0 && (
             <div class='mb-3 text-sm text-muted-foreground dark:text-slate-300'>
-              {publication.authors.map((author, index) => (
+              {displayedAuthors.map((author, index) => (
                 <span class='author-item'>
                   {author.homepage ? (
                     <a
@@ -145,35 +157,38 @@ const symbolMutedClass = 'text-muted-foreground/80 dark:text-slate-400/80'
                   {author.role === 'project-leader' && (
                     <sup class={cn(symbolBaseClass, 'ml-px')}>‡</sup>
                   )}
-                  {index < publication.authors.length - 1 && (
+                  {index < displayedAuthors.length - 1 && (
                     <span class='text-muted-foreground/70 dark:text-slate-400/70'>, </span>
                   )}
                 </span>
               ))}
+              {hasHiddenAuthors && (
+                <span class='text-muted-foreground/70 dark:text-slate-400/70'>, et al.</span>
+              )}
             </div>
           )
         }
 
         {
-          (publication.authors.some((a) => a.isEqual || a.isCoreContributor || a.role) ||
+          (displayedAuthors.some((a) => a.isEqual || a.isCoreContributor || a.role) ||
             publication.authorsAlphabetical) && (
             <div class={cn('mb-3 text-xs', symbolMutedClass, 'flex flex-wrap gap-x-3 gap-y-1')}>
-              {publication.authors.some((a) => a.isEqual) && (
+              {displayedAuthors.some((a) => a.isEqual) && (
                 <span>
                   <sup class={symbolBaseClass}>*</sup>Equal contribution
                 </span>
               )}
-              {publication.authors.some((a) => a.isCoreContributor) && (
+              {displayedAuthors.some((a) => a.isCoreContributor) && (
                 <span>
                   <sup class={symbolBaseClass}>§</sup>Core contributor
                 </span>
               )}
-              {publication.authors.some((a) => a.role === 'project-leader') && (
+              {displayedAuthors.some((a) => a.role === 'project-leader') && (
                 <span>
                   <sup class={symbolBaseClass}>‡</sup>Project Leader
                 </span>
               )}
-              {publication.authors.some((a) => a.role === 'corresponding') && (
+              {displayedAuthors.some((a) => a.role === 'corresponding') && (
                 <span>
                   <sup class={symbolBaseClass}>†</sup>Corresponding author
                 </span>

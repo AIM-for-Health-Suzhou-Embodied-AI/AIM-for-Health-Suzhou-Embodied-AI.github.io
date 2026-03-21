@@ -7,6 +7,7 @@ interface Props {
     name: string
     role: string
     photo: string
+    homepage?: string
     bio?: string
   }
 }
@@ -32,8 +33,23 @@ const { class: className, member, ...props } = Astro.props
     />
   </div>
   <div class='flex flex-col items-center gap-1.5'>
-    <h3 class='text-lg font-bold text-slate-900 dark:text-white'>{member.name}</h3>
-    <p class='text-xs font-semibold uppercase tracking-wider text-primary/80'>{member.role}</p>
+    <h3 class='text-lg font-bold text-slate-900 dark:text-white'>
+      {
+        member.homepage ? (
+          <a
+            href={member.homepage}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='transition-colors hover:text-primary dark:hover:text-primary'
+          >
+            {member.name}
+          </a>
+        ) : (
+          member.name
+        )
+      }
+    </h3>
+    <p class='text-xs font-semibold uppercase tracking-wider text-primary'>{member.role}</p>
     {
       member.bio && (
         <p class='line-clamp-3 max-w-[18rem] text-sm leading-relaxed text-slate-600 dark:text-slate-300'>

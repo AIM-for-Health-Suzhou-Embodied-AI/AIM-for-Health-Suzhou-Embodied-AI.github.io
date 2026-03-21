@@ -1,16 +1,28 @@
 ---
-import config from '@/site-config'
-
 import { Icon } from '@/components/user'
+import config from '@/site-config'
 
 const year = new Date().getFullYear()
 const footerConf = config.footer || {}
 
-// Create social links with RSS
-const socialLinks = {
-  ...(footerConf.social || {}),
-  rss: '/rss.xml'
-}
+const externalCollaborators = [
+  {
+    name: 'Australian National University',
+    logo: '/images/Australian National University.png'
+  },
+  {
+    name: 'DEEPGLINT',
+    logo: '/images/DEEPGLINT.png'
+  },
+  {
+    name: 'MEDBOT',
+    logo: '/images/MEDBOT.png'
+  },
+  {
+    name: 'Xiaohongshu',
+    logo: '/images/xiaohongshu.png'
+  }
+]
 ---
 
 <script>
@@ -20,7 +32,8 @@ const socialLinks = {
     if (website) {
       try {
         // Try to parse as URL first
-        const targetHostname = new URL(website.includes('://') ? website : `https://${website}`).hostname
+        const targetHostname = new URL(website.includes('://') ? website : `https://${website}`)
+          .hostname
         if (window.location.hostname === targetHostname) {
           icpLink.classList.remove('hidden')
         }
@@ -36,40 +49,65 @@ const socialLinks = {
 
 <footer class='mx-auto mb-5 mt-16'>
   <div class='border-t border-border/60 pt-5'>
-    <div class='flex items-center gap-y-3 max-sm:flex-col sm:justify-between sm:gap-y-0'>
-      <div
-        class='flex items-center gap-x-4 gap-y-2 text-sm text-muted-foreground max-sm:flex-col [&_a:hover]:text-primary [&_a]:text-foreground'
-      >
-        {
-          footerConf.registration && footerConf.registration.website && (
-            <a
-              id='icp-registration'
-              class='hidden text-xs'
-              data-website={footerConf.registration.website}
-              style='color:hsl(var(--muted-foreground)/var(--tw-text-opacity,1))'
-              href={footerConf.registration.url}
-              target='_blank'
+    <div class='space-y-4'>
+      <div class='flex gap-6 max-sm:flex-col sm:items-start sm:justify-between'>
+        <div class='space-y-3'>
+          <div class='flex items-center gap-3 text-foreground'>
+            <img src={config.favicon} alt={config.author} class='h-7 w-7 object-contain' />
+            <span class='text-base font-semibold tracking-tight'>{config.author} | Embodied AI</span
             >
-              {footerConf.registration.text}
+          </div>
+          <div class='flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground'>
+            <span class='inline-flex items-center gap-2'>
+              <Icon name='location' class='size-4 text-muted-foreground' />
+              {config.personal?.location}
+            </span>
+            <a class='inline-flex items-center gap-2 transition-colors hover:text-foreground'>
+              <Icon name='email' class='size-4 text-muted-foreground' />
+              <span>xuelian.cheng@monash.edu</span>
             </a>
-          )
-        }
-        <span>© {year} {config.author}. Embodied intelligence, clinical relevance, and multimodal reasoning.</span>
+            {
+              footerConf.registration && footerConf.registration.website && (
+                <a
+                  id='icp-registration'
+                  class='hidden text-xs'
+                  data-website={footerConf.registration.website}
+                  style='color:hsl(var(--muted-foreground)/var(--tw-text-opacity,1))'
+                  href={footerConf.registration.url}
+                  target='_blank'
+                >
+                  {footerConf.registration.text}
+                </a>
+              )
+            }
+          </div>
+        </div>
+
+        <div class='space-y-2 sm:text-right'>
+          <p class='text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground/80'>
+            External Collaborators
+          </p>
+          <div class='flex flex-wrap items-center gap-4 sm:justify-end'>
+            {
+              externalCollaborators.map((collaborator) => (
+                <img
+                  src={collaborator.logo}
+                  alt={collaborator.name}
+                  title={collaborator.name}
+                  class='h-8 w-auto object-contain transition-opacity duration-300 hover:opacity-100 dark:rounded-md dark:bg-white/95 dark:px-2 dark:py-1 dark:shadow-[0_4px_12px_rgba(255,255,255,0.06)]'
+                  loading='lazy'
+                />
+              ))
+            }
+          </div>
+        </div>
       </div>
 
-      {/* Social Brands */}
-      <div class='flex items-center gap-x-4'>
-        {
-          Object.entries(socialLinks).map(([platform, url]) => (
-            <a
-              class='inline-block text-muted-foreground transition-all hover:text-muted-foreground/75'
-              href={url as string}
-              aria-label={platform}
-            >
-              <Icon name={platform as any} />
-            </a>
-          ))
-        }
+      <div
+        class='flex gap-4 text-sm text-muted-foreground max-sm:flex-col sm:items-center sm:justify-between'
+      >
+        <span>© {year} {config.author}. All rights reserved.</span>
+        <!-- <span>{config.author} | Embodied AI</span> -->
       </div>
     </div>
   </div>

@@ -84,6 +84,18 @@ const displayedAuthors =
     ? leadingEqualAuthors.slice(0, 3)
     : publication.authors.slice(0, 1)
 const hasHiddenAuthors = publication.authors.length > displayedAuthors.length
+
+const titleLinkHref = (() => {
+  const links = publication.links || []
+  const arxiv = links.find((l) => l.type.toLowerCase() === 'arxiv')
+  if (arxiv?.href) return arxiv.href
+  const pdf = links.find((l) => l.type.toLowerCase() === 'pdf')
+  if (pdf?.href) return pdf.href
+  return null
+})()
+
+const titleClass =
+  'mb-2 mt-0 text-lg leading-tight text-foreground transition-colors group-hover:text-primary sm:text-xl'
 ---
 
 <div
@@ -96,12 +108,23 @@ const hasHiddenAuthors = publication.authors.length > displayedAuthors.length
   <div class='grid gap-4 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start'>
     <div class='min-w-0'>
       <div class='mb-3'>
-        <p
-          class='mb-2 mt-0 text-lg leading-tight text-foreground transition-colors group-hover:text-primary sm:text-xl'
-          style='line-height: 1.4;'
-        >
-          {publication.title}
-        </p>
+        {
+          titleLinkHref ? (
+            <a
+              href={titleLinkHref}
+              target='_blank'
+              rel='noopener noreferrer'
+              class={cn(titleClass, 'block hover:underline')}
+              style='line-height: 1.4;'
+            >
+              {publication.title}
+            </a>
+          ) : (
+            <p class={titleClass} style='line-height: 1.4;'>
+              {publication.title}
+            </p>
+          )
+        }
 
         <div class='mb-3 flex flex-wrap gap-2'>
           <span

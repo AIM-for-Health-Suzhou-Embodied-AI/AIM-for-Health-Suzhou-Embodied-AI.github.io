@@ -26,7 +26,9 @@ Use `AIM_lab/public/images` for homepage and section images.
 Recommended location:
 
 - `public/images`
-  Lab intro images, research direction images, publication preview images, footer collaborator logos.
+  Lab intro images, research direction images, footer collaborator logos, and other non-paper assets.
+- `public/images/paper`
+  Publication preview thumbnails used by `previewImage` in `src/pages/index.astro`. Add new paper teasers here and reference them as `/images/paper/your-file.png`.
 - `public/avatar`
   Member headshots. This is the current location used by the homepage.
 
@@ -35,6 +37,7 @@ Examples already used on the homepage:
 - `public/images/wormhole.png`
 - `public/images/social-card.webp`
 - `public/images/Digital Twins.png`
+- `public/images/paper/` (e.g. `SLT-Net.png`, `HybridStereoNet.png`, … for publication cards)
 
 ## Where To Change Image Paths
 
@@ -77,14 +80,14 @@ Each direction uses its own `image` field. Change that path to update the card i
 
 ### 3. Publication preview images
 
-Publication preview images are also configured in:
+Publication preview images live under **`public/images/paper`**. Configure them in:
 
 - `src/pages/index.astro`
 
 Search for `previewImage`, for example:
 
 ```ts
-previewImage: '/images/social-card.webp'
+previewImage: '/images/paper/SLT-Net.png'
 ```
 
 ### 4. Member photos

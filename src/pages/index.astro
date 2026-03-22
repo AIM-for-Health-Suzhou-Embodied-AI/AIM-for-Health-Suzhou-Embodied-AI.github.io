@@ -26,7 +26,7 @@ const members = [
   },
   {
     name: 'Shiyan Su',
-    homepage: '',
+    homepage: 'https://github.com/ooonesevennn',
     role: 'Monsh University PhD Student',
     photo: '/avatar/shiyan su.png',
     bio: ''
@@ -40,6 +40,7 @@ const members = [
   },
   {
     name: 'Zhiyi Jiang',
+    homepage: 'https://scholar.google.com/citations?user=35_934cAAAAJ&hl=en',
     role: 'Monsh-SEU joint PhD Student',
     photo: '/avatar/zhiyi jiang.png',
     bio: ''
@@ -100,7 +101,7 @@ const publications = [
       { type: 'website', href: 'https://xueliancheng.github.io/SLT-Net-project/' },
     ],
     status: 'accepted' as const,
-    previewImage: '/images/social-card.webp',
+    previewImage: '/images/paper/SLT-Net.png',
     previewAlt: 'Embodied reasoning paper preview'
   },
   {
@@ -122,7 +123,7 @@ const publications = [
       { type: 'code', href: 'https://github.com/XuelianCheng/HybridStereoNet' }
     ],
     status: 'accepted' as const,
-    previewImage: '/images/wormhole.png',
+    previewImage: '/images/paper/HybridStereoNet.png',
     previewAlt: 'Laparoscopic stereo matching paper preview'
   },
   {
@@ -144,7 +145,7 @@ const publications = [
       { type: 'code', href: 'https://github.com/Ruyi-Zha/endosurf.git' }
     ],
     status: 'accepted' as const,
-    previewImage: '/images/social-card.webp',
+    previewImage: '/images/paper/endosurf.png',
     previewAlt: 'EndoSurf paper preview'
   },
   {
@@ -171,7 +172,7 @@ const publications = [
       { type: 'website', href: 'https://mp.weixin.qq.com/s/aI0vwG5e1U03Squ0rJzcIQ' }
     ],
     status: 'under-review' as const,
-    previewImage: '/images/wormhole.png',
+    previewImage: '/images/paper/Video-Thinker.png',
     previewAlt: 'Video-Thinker paper preview'
   },
   {
@@ -188,9 +189,12 @@ const publications = [
     year: '2026',
     type: 'conference' as const,
     abstract: '',
-    links: [{ type: 'code', href: 'https://github.com/ooonesevennn/DiffNR' }],
+    links: [
+      { type: 'pdf', href: 'https://ojs.aaai.org/index.php/AAAI/article/view/37871' },
+      { type: 'code', href: 'https://github.com/ooonesevennn/DiffNR' }
+      ],
     status: 'accepted' as const,
-    previewImage: '/images/social-card.webp',
+    previewImage: '/images/paper/DiffNR.png',
     previewAlt: 'DiffNR paper preview'
   },
   {
@@ -208,17 +212,29 @@ const publications = [
     abstract: '',
     links: [{ type: 'arxiv', href: 'https://arxiv.org/pdf/2511.17048' }],
     status: 'preprint' as const,
-    previewImage: '/images/wormhole.png',
+    previewImage: '/images/paper/RoomPlanner.png',
     previewAlt: 'RoomPlanner paper preview'
   }
 ]
+
+const publicationYear = (title: string) => {
+  const y = publications.find((p) => p.title === title)?.year
+  return y !== undefined ? parseInt(y, 10) : Number.POSITIVE_INFINITY
+}
+
+/** Newest year first within each research direction (below Featured Research Projects). */
+const sortPapersNewestFirst = <
+  T extends { title: string; href: string; meta: string }
+>(
+  papers: T[]
+) => [...papers].sort((a, b) => publicationYear(b.title) - publicationYear(a.title))
 
 const researchDirections = [
   {
     title: 'Multimodal World Model',
     description:
       'Enables systems to perceive, interpret, and reason about dynamic scenes from videos and 3D representations.',
-    image: '/images/wormhole.png',
+    image: '/images/Multimodal World Model.png',
     papers: [
       {
         title: 'Implicit Motion Handling for Video Camouflaged Object Detection',
@@ -236,7 +252,7 @@ const researchDirections = [
     title: 'Geometry Estimation and 3D Reconstruction',
     description:
       'Focuses on recovering accurate 3D geometry, depth, and structure from visual data, especially in medical scenarios.',
-    image: '/images/social-card.webp',
+    image: '/images/Geometry Estimation and 3D Reconstruction.png',
     papers: [
       {
         title: 'Deep laparoscopic stereo matching with transformers',
@@ -261,7 +277,7 @@ const researchDirections = [
     title: 'Registration',
     description:
       'Studies robust alignment between 2D and 3D data to support precise applications such as surgical navigation.',
-    image: '/images/wormhole.png'
+    image: '/images/Registration.png'
   },
   {
     title: 'Digital Twins',
@@ -278,7 +294,12 @@ const researchDirections = [
   }
 ]
 
-const researchDirectionsWithLinks = researchDirections.map((direction) => ({
+const researchDirectionsOrdered = researchDirections.map((direction) => ({
+  ...direction,
+  papers: direction.papers ? sortPapersNewestFirst(direction.papers) : direction.papers
+}))
+
+const researchDirectionsWithLinks = researchDirectionsOrdered.map((direction) => ({
   ...direction,
   readMoreHref:
     direction.papers && direction.papers.length > 0
@@ -344,7 +365,7 @@ const publicationsByDirection = researchDirectionsWithLinks
                 <span class='hero-slogan is-active' data-lang='en'
                   >See the unseen, shape the shell</span
                 >
-                <span class='hero-slogan' data-lang='zh'>见不可见，塑其形壳</span>
+                <span class='hero-slogan' data-lang='zh'>洞见未见，塑以躯壳</span>
                 <span class='hero-slogan' data-lang='ja'>見えないものを捉え、形を与える</span>
               </span>
             </p>
@@ -448,7 +469,7 @@ const publicationsByDirection = researchDirectionsWithLinks
               class='relative h-full min-h-[350px] w-full overflow-hidden rounded-[2rem] border border-slate-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:border-white/5'
             >
               <img
-                src='/images/wormhole.png'
+                src='/images/Embody AI Logo.jpg'
                 alt='Spatial Perception Research'
                 class='absolute inset-0 h-full w-full object-cover transition-transform duration-1000 hover:scale-105'
                 loading='lazy'

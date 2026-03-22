@@ -163,7 +163,7 @@ const publications = [
     ],
     venue: 'Submitted to ICML',
     year: '2026',
-    type: 'preprint' as const,
+    type: 'conference' as const,
     abstract: '',
     links: [
       { type: 'arxiv', href: 'https://arxiv.org/abs/2510.23473' },
@@ -208,7 +208,7 @@ const publications = [
     ],
     venue: 'Preprint',
     year: '2025',
-    type: 'preprint' as const,
+    type: 'conference' as const,
     abstract: '',
     links: [{ type: 'arxiv', href: 'https://arxiv.org/pdf/2511.17048' }],
     status: 'preprint' as const,
@@ -484,11 +484,11 @@ const publicationsByDirection = researchDirectionsWithLinks
             <div
               class='mb-6 font-mono text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500'
             >
-              [ About The Lab ]
+              [ About The Team ]
             </div>
 
             <h2
-              class='text-3xl font-semibold leading-[1.2] tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-[2.8rem]'
+              class='text-3xl font-semibold leading-[1.17] tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-[2.8rem] lg:leading-[1.17]'
             >
               We build intelligent visual systems that bridge <span class='text-primary'
                 >embodied AI</span
@@ -529,11 +529,6 @@ const publicationsByDirection = researchDirectionsWithLinks
         class='reveal-on-scroll relative z-10 w-full bg-[#0a0a0a] px-6 py-20 text-white sm:px-10 sm:py-24 lg:px-16 lg:py-28'
         data-reveal-delay='50'
       >
-        <!-- Subtle noise/texture for the dark background -->
-        <div
-          class="pointer-events-none absolute inset-0 bg-[url('/images/noise.png')] opacity-[0.03] mix-blend-overlay"
-        >
-        </div>
         <div
           class='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.05),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(45,212,191,0.05),transparent_40%)]'
         >

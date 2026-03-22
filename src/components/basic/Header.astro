@@ -14,7 +14,7 @@ function resolveHref(path: string) {
   class='group sticky top-4 z-30 mb-12 flex items-center justify-between rounded-xl border border-transparent max-sm:py-1 sm:rounded-2xl [&.not-top]:border-border [&.not-top]:bg-background/60 [&.not-top]:px-1.5 [&.not-top]:backdrop-blur-md dark:[&.not-top]:bg-muted/60'
 >
   <a
-    class='z-30 text-xl font-semibold group-[.not-top]:ms-2 sm:group-[.not-top]:ms-3'
+    class='header-brand z-30 text-xl font-semibold group-[.not-top]:ms-2 sm:group-[.not-top]:ms-3'
     style='transition:margin-inline 0.3s'
     href='/'
     aria-label='Brand'
@@ -31,7 +31,7 @@ function resolveHref(path: string) {
           (config.header?.menu || []).map((item: any) => (
             <a
               href={resolveHref(item.link)}
-              class='w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary md:w-fit md:px-3'
+              class='header-nav-link w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary md:w-fit md:px-3'
               aria-label='Nav menu item'
             >
               {item.title}
@@ -73,13 +73,24 @@ function resolveHref(path: string) {
 
   class Header extends HTMLElement {
     connectedCallback() {
-      let preScrollY = window.scrollY
-      this.classList.toggle('not-top', preScrollY > 20)
+      const updateContrastMode = () => {
+        const rect = this.getBoundingClientRect()
+        const probeX = Math.floor(window.innerWidth / 2)
+        const probeY = Math.min(window.innerHeight - 1, Math.max(0, Math.floor(rect.bottom + 8)))
+        const probeElement = document.elementFromPoint(probeX, probeY)
+        const isOverDarkSection =
+          Boolean(probeElement?.closest('#research-directions')) &&
+          !document.documentElement.classList.contains('dark')
+        this.classList.toggle('on-dark', isOverDarkSection)
+      }
+
+      this.classList.toggle('not-top', window.scrollY > 20)
+      updateContrastMode()
       window.addEventListener('scroll', () => {
         this.classList.toggle('not-top', window.scrollY > 20)
-        this.dataset.show = (window.scrollY < 600 || window.scrollY < preScrollY).toString()
-        preScrollY = window.scrollY
+        updateContrastMode()
       })
+      window.addEventListener('resize', updateContrastMode)
 
       const darkModeBtn = this.querySelector('#toggleDarkMode') as HTMLElement
       darkModeBtn.addEventListener('click', () => {
@@ -121,8 +132,58 @@ function resolveHref(path: string) {
         rgba(39, 39, 42, 0.08) 0px 4px 6px -4px;
     }
 
-    &[data-show='false']:not(.expanded) {
-      transform: translateY(-5rem);
+    &.on-dark {
+      color: rgb(248 250 252 / 0.95);
+    }
+
+  }
+
+  header-component.on-dark #toggleDarkMode,
+  header-component.on-dark #toggleMenu {
+    border-color: rgb(248 250 252 / 0.45);
+    color: rgb(248 250 252 / 0.95);
+  }
+
+  header-component.on-dark #toggleDarkMode:hover,
+  header-component.on-dark #toggleMenu:hover {
+    background-color: rgb(248 250 252 / 0.14);
+  }
+
+  .header-brand,
+  .header-nav-link {
+    transition: color 0.35s ease;
+  }
+
+  header-component.on-dark .header-brand,
+  header-component.on-dark .header-nav-link {
+    color: transparent;
+    background-image: linear-gradient(
+      105deg,
+      rgb(248 250 252 / 0.95),
+      rgb(186 230 253 / 0.95),
+      rgb(248 250 252 / 0.95)
+    );
+    background-size: 220% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: header-text-gradient 2.2s ease-in-out infinite;
+  }
+
+  @keyframes header-text-gradient {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    header-component.on-dark .header-brand,
+    header-component.on-dark .header-nav-link {
+      animation: none;
+      background-position: 50% 50%;
     }
   }
 

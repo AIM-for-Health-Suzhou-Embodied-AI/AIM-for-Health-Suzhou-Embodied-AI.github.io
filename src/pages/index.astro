@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { Button, MemberCard, PublicationSection } from '@/components/user'
+import { title } from 'node:process'
 
 const toAnchorId = (value: string) =>
   `publication-${value
@@ -214,6 +215,23 @@ const publications = [
     status: 'preprint' as const,
     previewImage: '/images/paper/RoomPlanner.png',
     previewAlt: 'RoomPlanner paper preview'
+  },
+  {
+    title: "ColonAdapter: Geometry Estimation Through Foundation Model Adaptation for Colonoscopy",
+    authors: [
+      { name: 'Zhiyi Jiang' },
+      { name: ''}
+    ],
+    type: 'journal' as const,
+    venue: 'IEEE Robotics and Automation Letters',
+    year: '2025',
+    links: [
+      {type: 'ieee', href: "https://ieeexplore.ieee.org/abstract/document/11214345"},
+      {type: 'arxiv', href: "https://arxiv.org/abs/2511.22250 "},
+      {type: 'code', href: "https://github.com/JayJiang99/ColonAdapter"}
+    ],
+    status: 'accepted' as const,
+    previewImage: '/images/paper/ColonAdapter.png',
   }
 ]
 
@@ -270,6 +288,11 @@ const researchDirections = [
           'DiffNR: Diffusion-Enhanced Neural Representation Optimization for Sparse-View 3D Tomographic Reconstruction',
         href: 'https://github.com/ooonesevennn/DiffNR',
         meta: 'AAAI 2026'
+      },
+      {
+        title: "ColonAdapter: Geometry Estimation Through Foundation Model Adaptation for Colonoscopy",
+        href: "https://ieeexplore.ieee.org/abstract/document/11214345",
+        meta: "IEEE Transactions on Medical Imaging 2025"
       }
     ]
   },
@@ -277,7 +300,10 @@ const researchDirections = [
     title: 'Registration',
     description:
       'Studies robust alignment between 2D and 3D data to support precise applications such as surgical navigation.',
-    image: '/images/Registration.png'
+    image: '/images/Registration.png',
+    papers: [
+      
+    ]
   },
   {
     title: 'Digital Twins',
